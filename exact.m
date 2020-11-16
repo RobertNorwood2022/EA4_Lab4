@@ -68,7 +68,7 @@ X = [xA yA zA]'
 
 %solutions at t=2 for B
 t = 2;
-c = scaled_evec_B \ Xa0;
+c = scaled_evec_B \ Xb0;
 c1 = c(1);
 c2 = c(2);
 c3 = c(3);
