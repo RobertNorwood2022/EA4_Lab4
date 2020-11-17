@@ -171,6 +171,61 @@ ylabel('u and v');
 legend({'u', 'v',})
 hold off
 
+figure(9)
+hold on
+ustar = 0.4;
+vstar = 0.4;
+K = 2;
+u0 = 0.25;
+v0 = 0.35;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 4c: K = 2, (u0,v0)=(0.25,0.35), (u*,v*)=(0.4,0.4)');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
+hold off
+
+figure(10)
+hold on
+ustar = 0.4;
+vstar = 0.4;
+K = 0.5;
+u0 = 0.25;
+v0 = 0.35;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 4d: K = 0.5, (u0,v0)=(0.25,0.35), (u*,v*)=(0.4,0.4)');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
+hold off
+
+figure(11)
+hold on
+ustar = 0.4;
+vstar = 0.4;
+K = 0.25;
+u0 = 0.25;
+v0 = 0.35;
+tfin = 150;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 4e: K = 0.25, (u0,v0)=(0.25,0.35), (u*,v*)=(0.4,0.4)');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 150]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
+hold off
+
 
 %mini-function, allows so you don't have to call adaptive_solver with all
 %the variables which are unchanging
