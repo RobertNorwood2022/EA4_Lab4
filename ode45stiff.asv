@@ -14,13 +14,13 @@ Xb0 = [1 2 3];
 tfin = 2;
 t = [0 tfin];
 relative_tolerance_1 = 1.75e-4;
-relative_tolerance_2 = 1.5e-4;
+relative_tolderance_2 = 1.5e-4;
 
 %solution for A
 count = 0;
 matrix = A;
 options = odeset('RelTol',relative_tolerance_1);
-[t,XsolA] = ode45(@prime,t,Xa0, options);
+[t,XsolA] = ode45(@prime,t,Xa0, 'RelTol', options);
 xa = XsolA(:,1);
 fprintf('--Equation 1-- \n');
 fprintf('Count: %i \n', count);
@@ -29,8 +29,8 @@ fprintf('Final x: %10.10f \n', xa(length(xa)));
 %solution for B
 count = 0;
 martix = B;
-options = odeset('RelTol',relative_tolerance_2);
-[t, XsolB] = ode45(@prime,t,Xb0, options);
+options = odeset('RelTol',relat
+[t, XsolB] = ode45(@prime,t,Xb0, 'RelTol', relative_tolerance_2);
 xb = XsolB(:,1);
 fprintf('--Equation 2-- \n');
 fprintf('Count: %i \n', count);

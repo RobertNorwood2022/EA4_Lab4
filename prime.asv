@@ -1,0 +1,14 @@
+function [xprime;yprime;zprime] = prime(x,y,z)
+global count
+count  = count + 1
+
+%soln for A
+xprime = (196.5 * x) + (1.5 * y) + (-199 * z);
+yprime = (200.5 * x) + (-2.5 * y) + (-199 * z);
+zprime = (396.5 * x) + (1.5 * y) + (-399 * z);
+
+%soln for B
+% 
+
+
+end
