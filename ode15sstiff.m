@@ -1,7 +1,7 @@
 %ode45stiff
 
 %set up environment
-clc
+%clc
 
 
 %set values
