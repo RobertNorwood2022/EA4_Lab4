@@ -47,7 +47,7 @@ fprintf('Eqn 1: \n')
 xA = c1*(scaled_evec_A(1,1) * exp(evalA(1) * t)) + c2*(scaled_evec_A(1,2) * exp(evalA(2) * t)) + c3*(scaled_evec_A(1,3) * exp(evalA(3) * t));
 yA = c1*(scaled_evec_A(2,1) * exp(evalA(1) * t)) + c2*(scaled_evec_A(2,2) * exp(evalA(2) * t)) + c3*(scaled_evec_A(2,3) * exp(evalA(3) * t));
 zA = c1*(scaled_evec_A(3,1) * exp(evalA(1) * t)) + c2*(scaled_evec_A(3,2) * exp(evalA(2) * t)) + c3*(scaled_evec_A(3,3) * exp(evalA(3) * t));
-X = [xA yA zA]'
+XA = [xA yA zA]'
 
 %solutions at t=2 for B
 t = 2;
@@ -60,4 +60,4 @@ fprintf('Eqn 2: \n')
 xB = c1*(scaled_evec_B(1,1) * exp(evalB(1) * t)) + c2*(scaled_evec_B(1,2) * exp(evalB(2) * t)) + c3*(scaled_evec_B(1,3) * exp(evalB(3) * t));
 yB = c1*(scaled_evec_B(2,1) * exp(evalB(1) * t)) + c2*(scaled_evec_B(2,2) * exp(evalB(2) * t)) + c3*(scaled_evec_B(2,3) * exp(evalB(3) * t));
 zB = c1*(scaled_evec_B(3,1) * exp(evalB(1) * t)) + c2*(scaled_evec_B(3,2) * exp(evalB(2) * t)) + c3*(scaled_evec_B(3,3) * exp(evalB(3) * t));
-X = [xB yB zB]'
+XB = [xB yB zB]'

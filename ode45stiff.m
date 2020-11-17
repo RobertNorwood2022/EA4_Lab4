@@ -29,7 +29,7 @@ fprintf('Final x: %10.10f \n', xa(length(xa)));
 
 %solution for B
 count = 0;
-martix = B;
+matrix = B;
 options = odeset('RelTol',relative_tolerance_2);
 [tb, XsolB] = ode45(@prime,t,Xb0, options);
 xb = XsolB(:,1);

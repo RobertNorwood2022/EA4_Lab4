@@ -5,8 +5,7 @@ warning('off')
 
 %set-up global variables
 global count
-global mu
-
+global K
 
 %inputs 
 %[] =textread('adapt.dat', %f,1);
@@ -15,97 +14,111 @@ hbig = 1;
 hsmall = 1e-12;
 hcut = 2;
 hraise = 1.05;
-epsilon = 10e-4;
-x0 = 1;
-y0 = 0;
-tfin = 200;
-mu =0;
+epsilon = 0.01;
+u0 = 0.3;
+v0 = 0.3;
+tfin = 50;
+K = 0.25; 
+ustar = 0.8;
+vstar = 0.4;
+
 
 
 %print confirmation of read in data
 fprintf('======== \n');
 fprintf('Read in Data: \n');
-fprintf('h: %f \n',h);
-fprintf('hbig: %f \n',hbig);
-fprintf('hsmall: %f \n',hsmall);
-fprintf('hcut: %f \n',hcut);
-fprintf('hraise: %f \n',hraise);
-fprintf('epsilon: %f \n',epsilon);
-fprintf('x0: %f \n',x0);
-fprintf('y0: %f \n',y0);
-fprintf('tfin: %f \n',tfin);
-fprintf('mu: %f \n',mu);
+fprintf('h: %f \n', h);
+fprintf('hbig, hsmall: %f, %d \n', hbig, hsmall);
+fprintf('hcut, hraise: %f, %f \n', hcut, hraise);
+fprintf('epislon: %f \n', epsilon);
+fprintf('tfin: %f \n', tfin);
+fprintf('K: %f \n', K);
+fprintf('u*, v*: %f %f \n', ustar, vstar);
+fprintf('u0,v0: %f %f \n', u0, v0);
 fprintf('======== \n');
 
+
+
 %call the solver - not needed as we call it each time to graph it
-%[Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin);
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
 
-
-
-%error calculation
-%PLACEHOLDER
-
-
-
-%graphing 
+%graphing!
+%figures 3a-3c
 figure(1)
-mu = 0
-[Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin);
 hold on
-plot(Tvector, Yvector, 'Linewidth',2,'Color','red');
-plot(Tvector, Xvector, 'Linewidth',2,'Color','black');
-xlim([150 200])
-legend({'Y', 'X'})
-title('\mu = 0')
-xlabel('t')
-ylabel('x & y')
+K = 0.25;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 3a: K = 0.25');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
 hold off
 
 figure(2)
-mu = 0.1
-[Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin);
 hold on
-plot(Tvector, Yvector, 'Linewidth',2,'Color','red');
-plot(Tvector, Xvector, 'Linewidth',2,'Color','black');
-xlim([150 200])
-legend({'Y', 'X'})
-title('\mu = 0.1')
-xlabel('t')
-ylabel('x & y')
+K = 1;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 3b: K = 1');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
 hold off
 
 figure(3)
-mu = 1
-[Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin);
 hold on
-plot(Tvector, Yvector, 'Linewidth',2,'Color','red');
-plot(Tvector, Xvector, 'Linewidth',2,'Color','black');
-xlim([150 200])
-legend({'Y', 'X'})
-title('\mu = 1')
-xlabel('t')
-ylabel('x & y')
+K = 2.5;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 3c: K = 2.5');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
 hold off
 
+%figures 3d-3f
+
+
+%figures 4a-d
 figure(4)
-mu = 10
-[Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin);
 hold on
-plot(Tvector, Yvector, 'Linewidth',2,'Color','red');
-plot(Tvector, Xvector, 'Linewidth',2,'Color','black');
-xlim([100 200])
-legend({'Y', 'X'})
-title('\mu = 10')
-xlabel('t')
-ylabel('x & y')
+ustar = 0.4;
+vstar = 0.4;
+K = 1;
+u0 = 0.35
+v0 = 0.25;
+[Tvector, Uvector, Vvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,u0,v0,tfin, ustar, vstar);
+title('Figure 4a: K = 1, (u0,v0)=(0.35,0.25), (u*,v*)=(0.4,0.4)');
+plot(Tvector, Uvector, 'linewidth', 2, 'Color', 'black');
+plot(Tvector, Vvector, 'linewidth', 2, 'Color', 'red');
+ylim([-0.025 1.025]);
+xlim([0 50]);
+xlabel('Time');
+ylabel('u and v');
+legend({'u', 'v',})
 hold off
 
 
 %mini-function, allows so you don't have to call adaptive_solver with all
 %the variables which are unchanging
-function [Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin)
+%because I don't want to rename the variables. x=u, y=v
+function [Tvector, Xvector, Yvector] = real_adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin, ustar, vstar)
 global count
-global mu
+global alpha
+global beta
+
+alpha = (1 - ustar)/(vstar);
+beta = (1 - vstar)/(ustar);
 
 Tvector = [];
 Xvector = [];
@@ -118,14 +131,15 @@ t = 0;
 
 [h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin, t, Tvector, Xvector, Yvector, x, y] = adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin, t, Tvector, Xvector, Yvector,x,y);
 fprintf('Results: \n');
-fprintf('Final Y: %f \n', y);
-fprintf('Final X: %f \n', x);
+fprintf('Alpha: %f \n', alpha);
+fprintf('Beta: %f \n', beta);
+fprintf('Final v: %f \n', y);
+fprintf('Final u: %f \n', x);
 fprintf('Count: %i \n', count);
 fprintf('Steps: %i \n', size(Tvector,1));
 fprintf('S: %f \n', (2*size(Tvector,1)/count));
 fprintf('======= \n');
 end
-
 
 %main solver function
 function [h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin, t, Tvector, Xvector, Yvector, x, y] = adaptive_solver(h,hbig,hsmall,hcut,hraise,epsilon,x0,y0,tfin, t, Tvector, Xvector, Yvector,x,y)
@@ -183,10 +197,10 @@ end
 %error
 
 function [error_approx, xhigh, yhigh] = error_approximation(t,x,y,h)
-[xprimek0, yprimek0] = vprime(t,x,y);
+[xprimek0, yprimek0] = uvprime(t,x,y);
 xlow = x + (h * xprimek0);
 ylow = y + (h * yprimek0);
-[xprimek1, yprimek1] = vprime(t+h,xlow,ylow);
+[xprimek1, yprimek1] = uvprime(t+h,xlow,ylow);
 xprimeavg = (xprimek1 + xprimek0)/2;
 yprimeavg = (yprimek1 + yprimek0)/2;
 xhigh = x + (h * xprimeavg);
