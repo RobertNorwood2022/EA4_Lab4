@@ -1,4 +1,4 @@
-%ode45stiff
+%ode15sstiff
 
 %set up environment
 %clc
@@ -25,6 +25,10 @@ xas = XsolAs(:,1);
 fprintf('--Equation 1-- \n');
 fprintf('Count: %i \n', count);
 fprintf('nsteps: %i \n', length(xas));
+x_err = 100 * ((XsolAs(length(XsolAs),1) - XA(1))/(XA(1)));
+y_err = 100 * ((XsolAs(length(XsolAs),2) - XA(2))/(XA(2)));
+z_err = 100 * ((XsolAs(length(XsolAs),3) - XA(3))/(XA(3)));
+fprintf('Max Error: %f \n', max([x_err, y_err, z_err]));
 fprintf('Final x: %10.10f \n', xas(length(xas)));
 
 %solution for B
@@ -36,6 +40,10 @@ xbs = XsolBs(:,1);
 fprintf('--Equation 2-- \n');
 fprintf('Count: %i \n', count);
 fprintf('nsteps: %i \n', length(xbs));
+x_err = 100 * ((XsolBs(length(XsolBs),1) - XB(1))/(XB(1)));
+y_err = 100 * ((XsolBs(length(XsolBs),2) - XB(2))/(XB(2)));
+z_err = 100 * ((XsolBs(length(XsolBs),3) - XB(3))/(XB(3)));
+fprintf('Max Error: %f \n', max([x_err, y_err, z_err]));
 fprintf('Final x: %10.10f \n', xbs(length(xbs)));
 
 
